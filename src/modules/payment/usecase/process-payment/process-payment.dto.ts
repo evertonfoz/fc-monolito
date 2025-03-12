@@ -3,6 +3,7 @@ export interface ProcessPaymentInputDto {
   amount: number;
 }
 
+
 export interface ProcessPaymentOutputDto {
   transactionId: string;
   orderId: string;

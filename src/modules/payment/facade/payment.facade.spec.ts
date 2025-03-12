@@ -2,8 +2,10 @@ import { Sequelize } from "sequelize-typescript";
 import PaymentFacadeFactory from "../factory/payment.facade.factory";
 import TransactionModel from "../repository/transaction.model";
 
+
 describe("PaymentFacade test", () => {
   let sequelize: Sequelize;
+
 
   beforeEach(async () => {
     sequelize = new Sequelize({
@@ -17,19 +19,17 @@ describe("PaymentFacade test", () => {
     await sequelize.sync();
   });
 
+
   afterEach(async () => {
     await sequelize.close();
   });
 
-  it("should create a transaction", async () => {
-    // const repository = new TransactionRepostiory();
-    // const usecase = new ProcessPaymentUseCase(repository);
-    // const facade = new PaymentFacade(usecase);
 
+  it("should create a transaction", async () => {
     const facade = PaymentFacadeFactory.create();
 
     const input = {
-      orderId: "order-1",
+      orderId: "order1",
       amount: 100,
     };
 

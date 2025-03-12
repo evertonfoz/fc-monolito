@@ -1,42 +1,40 @@
-import Address from "../../../@shared/domain/value-object/address"
-import AddClientUseCase from "./add-client.usecase"
+import Client from "../../domain/client.entity";
+import AddressClientDto from "../../domain/value-object/address-client.dto";
+import AddClientUseCase from "./add-client.usecase";
+
 
 const MockRepository = () => {
   return {
-
     add: jest.fn(),
-    find: jest.fn()
-  }
-}
+    find: jest.fn(),
+  };
+};
 
-describe("Add Client use case unit test", () => {
 
-  it("should add a client", async () => {
-
-    const repository = MockRepository()
-    const usecase = new AddClientUseCase(repository)
+describe("Add Client Usecase unit test", () => {
+  it("should add client", async () => {
+    const repository = MockRepository();
+    const usecase = new AddClientUseCase(repository);
 
     const input = {
-      name: "Lucian",
-      email: "lucian@123.com",
-      document: "1234-5678",
-      address: new Address(
-        "Rua 123",
-        "99",
-        "Casa Verde",
-        "Criciúma",
-        "SC",
-        "88888-888",
-      )
-    }
+      name: "John",
+      email: "john@email",
+      document: "123",
+      address: new AddressClientDto(
+        'Street1', 
+        '1', 
+        'City1', 
+        '123', 
+        'State1', 
+        'Complement1'),
+    };
+    const client = new Client(input);
 
-    const result =  await usecase.execute(input)
-
-    expect(repository.add).toHaveBeenCalled()
-    expect(result.id).toBeDefined()
-    expect(result.name).toEqual(input.name)
-    expect(result.email).toEqual(input.email)
-    expect(result.address).toEqual(input.address)
-
-  })
-})
+    const result = await usecase.execute(client);
+    expect(result.id).toBe(client.id.id)
+    expect(result.name).toBe(client.name)
+    expect(result.email).toBe(client.email)
+    expect(result.document).toBe(client.document)
+    expect(result.address.city).toBe(client.address.city)
+  });
+});

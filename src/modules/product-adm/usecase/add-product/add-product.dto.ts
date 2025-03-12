@@ -6,8 +6,9 @@ export interface AddProductInputDto {
   stock: number;
 }
 
+
 export interface AddProductOutputDto {
-  id: string;
+  id?: string;
   name: string;
   description: string;
   purchasePrice: number;

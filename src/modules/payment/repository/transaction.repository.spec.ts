@@ -4,8 +4,10 @@ import Transaction from "../domain/transaction";
 import TransactionModel from "./transaction.model";
 import TransactionRepostiory from "./transaction.repository";
 
+
 describe("TransactionRepository test", () => {
   let sequelize: Sequelize;
+
 
   beforeEach(async () => {
     sequelize = new Sequelize({
@@ -19,11 +21,13 @@ describe("TransactionRepository test", () => {
     await sequelize.sync();
   });
 
+
   afterEach(async () => {
     await sequelize.close();
   });
 
-  it("should save a transaction", async () => {
+
+  it("should save transaction", async () => {
     const transaction = new Transaction({
       id: new Id("1"),
       amount: 100,

@@ -4,6 +4,7 @@ import transaction from "../domain/transaction";
 import PaymentGateway from "../gateway/payment.gateway";
 import TransactionModel from "./transaction.model";
 
+
 export default class TransactionRepostiory implements PaymentGateway {
   async save(input: transaction): Promise<transaction> {
     await TransactionModel.create({
@@ -15,6 +16,7 @@ export default class TransactionRepostiory implements PaymentGateway {
       updatedAt: input.updatedAt,
     });
 
+    
     return new Transaction({
       id: input.id,
       orderId: input.orderId,

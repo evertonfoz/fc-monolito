@@ -3,6 +3,7 @@ export interface PaymentFacadeInputDto {
   amount: number;
 }
 
+
 export interface PaymentFacadeOutputDto {
   transactionId: string;
   orderId: string;
@@ -11,6 +12,7 @@ export interface PaymentFacadeOutputDto {
   createdAt: Date;
   updatedAt: Date;
 }
+
 
 export default interface PaymentFacadeInterface {
   process(input: PaymentFacadeInputDto): Promise<PaymentFacadeOutputDto>;

@@ -6,8 +6,10 @@ import {
   ProcessPaymentOutputDto,
 } from "./process-payment.dto";
 
+
 export default class ProcessPaymentUseCase implements UseCaseInterface {
   constructor(private transactionRepository: PaymentGateway) {}
+
 
   async execute(
     input: ProcessPaymentInputDto

@@ -3,12 +3,14 @@ import Product from "../../domain/product.entity";
 import ProductGateway from "../../gateway/product.gateway";
 import { AddProductInputDto, AddProductOutputDto } from "./add-product.dto";
 
+
 export default class AddProductUseCase {
   private _productRepository: ProductGateway;
 
-  constructor(_productRepository: ProductGateway) {
-    this._productRepository = _productRepository;
+  constructor(productRepository: ProductGateway) {
+    this._productRepository = productRepository;
   }
+
 
   async execute(input: AddProductInputDto): Promise<AddProductOutputDto> {
     const props = {
@@ -19,9 +21,14 @@ export default class AddProductUseCase {
       stock: input.stock,
     };
 
-    const product = new Product(props);
-    this._productRepository.add(product);
 
+    const product = new Product(props);
+    try {
+      await this._productRepository.add(product);
+    } catch (error) {
+      console.error('Erro ao salvar o produto:', error);
+      throw error; // ou trate o erro de alguma forma adequada para o contexto
+    }
     return {
       id: product.id.id,
       name: product.name,
